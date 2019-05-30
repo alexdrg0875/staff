@@ -14,10 +14,6 @@ class DatabaseSeeder extends Seeder
         $this->call(UsersTableSeeder::class);
         $this->call(PositionsTableSeeder::class);
         $this->call(RolesTableSeeder::class);
-//    $i = 0;
-//      while ($i < 100) {
-//        $this->call(StaffTableSeeder::class);
-//        $i++;
-//      }
+        $this->call(StaffTableSeeder::class);
     }
 }

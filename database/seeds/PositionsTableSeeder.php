@@ -11,6 +11,24 @@ class PositionsTableSeeder extends Seeder
      */
     public function run()
     {
-        //
+        DB::table('positions')->insert([
+            'name' => 'national manager',
+        ]);
+
+        DB::table('positions')->insert([
+            'name' => 'division manager',
+        ]);
+
+        DB::table('positions')->insert([
+            'name' => 'area manager',
+        ]);
+
+        DB::table('positions')->insert([
+            'name' => 'supervisor',
+        ]);
+
+        DB::table('positions')->insert([
+            'name' => 'salesman',
+        ]);
     }
 }

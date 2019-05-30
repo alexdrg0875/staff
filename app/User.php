@@ -16,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'photo_id','role_id','is_active','name', 'email', 'password'
     ];
 
     /**
@@ -27,4 +27,22 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function role(){
+        return $this->belongsTo('App\Role');
+    }
+
+    public function photo(){
+        return $this->belongsTo('App\Photo');
+    }
+
+
+    public function isAdmin() {
+        if($this->role_id) {
+            if($this->role->name == "administrator" && $this->is_active == 1) {
+                return true;
+            }
+        }
+        return false;
+    }
 }
