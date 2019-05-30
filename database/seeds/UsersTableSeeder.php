@@ -18,6 +18,8 @@ class UsersTableSeeder extends Seeder
             'name' => 'administrator',
             'email' => 'administrator@gmail.com',
             'password' => bcrypt('administrator'),
+            'created_at' => '2019-05-30 21:18:14',
+            'updated_at' => '2019-05-30 21:18:14',
         ]);
 
         DB::table('users')->insert([
@@ -26,6 +28,8 @@ class UsersTableSeeder extends Seeder
             'name' => 'user',
             'email' => 'user@gmail.com',
             'password' => bcrypt('user'),
+            'created_at' => '2019-05-30 21:18:14',
+            'updated_at' => '2019-05-30 21:18:14',
         ]);
     }
 }

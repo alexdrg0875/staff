@@ -11,6 +11,9 @@
 |
 */
 
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -18,3 +21,14 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/logout', 'Auth\LoginController@logout');
+
+Route::group(['middleware' => 'admin'], function (){
+
+    Route::resource('admin/users', 'AdminUsersController');
+    Route::resource('admin/staff', 'AdminStaffController');
+    Route::resource('admin/positions', 'AdminPositionsController');
+    Route::resource('admin/medias', 'AdminMediasController');
+
+});
