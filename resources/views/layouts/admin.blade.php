@@ -153,7 +153,7 @@
                     </li>
 
                     <li>
-                        <a href="#"><i class="fa fa-wrench fa-fw"></i> Staff<span class="fa arrow"></span></a>
+                        <a href="#"><i class="fa fa-wrench fa-fw"></i>Staff<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
                                 <a href="{{route('staff.index')}}">All Staff</a>
@@ -169,14 +169,14 @@
 
 
                     <li>
-                        <a href="#"><i class="fa fa-wrench fa-fw"></i>Categories<span class="fa arrow"></span></a>
+                        <a href="#"><i class="fa fa-wrench fa-fw"></i>Positions<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
-                                <a href="{{route('positions.index')}}">All Categories</a>
+                                <a href="{{route('positions.index')}}">All Positions</a>
                             </li>
 
                             <li>
-                                <a href="{{route('positions.create')}}">Create Category</a>
+                                <a href="{{route('positions.create')}}">Create Position</a>
                             </li>
 
                         </ul>

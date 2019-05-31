@@ -6,6 +6,10 @@
         <p class="bg-danger">{{session('deleted_employee')}}</p>
     @endif
 
+    @if(Session::has('updated_employee'))
+        <p class="bg-success">{{session('updated_employee')}}</p>
+    @endif
+
     <h2 class="bg-primary text-center">STAFF</h2>
 
     <table class="table">

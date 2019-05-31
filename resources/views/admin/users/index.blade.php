@@ -5,6 +5,10 @@
         <p class="bg-danger">{{session('deleted_user')}}</p>
     @endif
 
+    @if(Session::has('updated_user'))
+        <p class="bg-success">{{session('updated_user')}}</p>
+    @endif
+
     <h2 class="bg-primary text-center">REGISTERED USERS</h2>
 
     <table class="table">

@@ -109,6 +109,8 @@ class AdminStaffController extends Controller
 
         $employee->update($input);
 
+        Session::flash('updated_employee', 'The employee has been updated');
+
         return redirect('/admin/staff');
     }
 

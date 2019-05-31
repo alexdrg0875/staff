@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Position;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class AdminPositionsController extends Controller
 {
@@ -13,7 +15,8 @@ class AdminPositionsController extends Controller
      */
     public function index()
     {
-        //
+        $positions = Position::all();
+        return view('admin.positions.index', compact('positions'));
     }
 
     /**
@@ -34,7 +37,9 @@ class AdminPositionsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Position::create($request->all());
+
+        return redirect('/admin/positions');
     }
 
     /**
@@ -56,7 +61,9 @@ class AdminPositionsController extends Controller
      */
     public function edit($id)
     {
-        //
+        $position = Position::findOrFail($id);
+
+        return view('admin.positions.edit' , compact('position'));
     }
 
     /**
@@ -68,7 +75,13 @@ class AdminPositionsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $position = Position::findOrFail($id);
+        $input = $request->all();
+        $position->update($input);
+
+        Session::flash('updated_position', 'The position has been updated');
+
+        return redirect('/admin/positions');
     }
 
     /**
@@ -79,6 +92,10 @@ class AdminPositionsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Position::findOrFail($id)->delete();
+
+        Session::flash('deleted_position', 'The position has been deleted');
+
+        return redirect('/admin/positions');
     }
 }

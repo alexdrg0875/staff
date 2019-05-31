@@ -113,6 +113,7 @@ class AdminUsersController extends Controller
 
         $user->update($input);
 
+        Session::flash('updated_user', 'The user has been updated');
         return redirect('/admin/users');
     }
 
@@ -125,10 +126,13 @@ class AdminUsersController extends Controller
     public function destroy($id)
     {
         $user = User::findOrFail($id);
+
         if($user->photo_id){                                        //preventing to delete default avatar photo
             unlink(public_path() . $user->photo->path);    //adding to delete user photo in /images folder
         }
+
         $user->delete();
+
         Session::flash('deleted_user', 'The user has been deleted');    // add putting information after deleting user
         return redirect('/admin/users');
     }
