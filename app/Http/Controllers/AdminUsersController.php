@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\UsersEditRequest;
 use App\Http\Requests\UsersRequest;
+use Illuminate\Support\Facades\Auth;
 use App\Photo;
 use App\Role;
 use App\User;

@@ -2,7 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StaffRequest;
+use App\Photo;
+use App\Position;
+use App\Role;
+use App\Staff;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 class AdminStaffController extends Controller
 {
@@ -13,7 +20,9 @@ class AdminStaffController extends Controller
      */
     public function index()
     {
-        //
+        $staff = Staff::all();
+
+        return view('admin.staff.index', compact('staff'));
     }
 
     /**
@@ -23,7 +32,8 @@ class AdminStaffController extends Controller
      */
     public function create()
     {
-        //
+        $positions = Position::pluck('name', 'id')->all();
+        return view('admin.staff.create', compact('positions'));
     }
 
     /**
@@ -32,9 +42,23 @@ class AdminStaffController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StaffRequest $request)
     {
-        //
+        $input = $request->all();
+
+        $user = Auth::user();
+        $input['user_id'] = $user->id;
+
+        if($file = $request->file('photo_id')) {
+            $name = time() . $file->getClientOriginalName();
+            $file->move('images', $name);   // save in public\images
+            $photo = Photo::create(['path' => $name]);
+            $input['photo_id'] = $photo->id;
+        }
+
+        Staff::create($input);
+
+        return redirect('/admin/staff');
     }
 
     /**
@@ -56,7 +80,9 @@ class AdminStaffController extends Controller
      */
     public function edit($id)
     {
-        //
+        $employee = Staff::findOrFail($id);
+        $positions = Position::pluck('name', 'id')->all();
+        return view('admin.staff.edit', compact('employee','positions'));
     }
 
     /**
@@ -66,9 +92,24 @@ class AdminStaffController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(StaffRequest $request, $id)
     {
-        //
+        $employee = Staff::findOrFail($id);
+        $input = $request->all();
+
+        $user = Auth::user();
+        $input['user_id'] = $user->id;
+
+        if($file = $request->file('photo_id')) {
+            $name = time() . $file->getClientOriginalName();
+            $file->move('images', $name);   // save in public\images
+            $photo = Photo::create(['path' => $name]);
+            $input['photo_id'] = $photo->id;
+        }
+
+        $employee->update($input);
+
+        return redirect('/admin/staff');
     }
 
     /**
@@ -79,6 +120,12 @@ class AdminStaffController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $employee = Staff::findOrFail($id);
+        if($employee->photo_id){                                        //preventing to delete default avatar photo
+            unlink(public_path() . $employee->photo->path);    //adding to delete user photo in /images folder
+        }
+        $employee->delete();
+        Session::flash('deleted_employee', 'The employee has been deleted');    // add putting information after deleting user
+        return redirect('/admin/staff');
     }
 }

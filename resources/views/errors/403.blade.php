@@ -1,7 +1,7 @@
-@extends('layouts.admin')
+@extends('layouts.app')
 
 @section('content')
 
-    <h1 class="text-center">403 Opps! Permission denied!</h1>
+    <h1 class="text-center">403 Opps! Unauthorized action!</h1>
 
 @endsection

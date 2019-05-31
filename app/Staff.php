@@ -3,9 +3,15 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Str;
 
 class Staff extends Model
 {
+    use SoftDeletes ;
+
+    protected $dates = ['started_at','deleted_at'];
+
     protected $fillable = [
         'name','user_id','position_id','photo_id','salary', 'parent_id', 'started_at'
     ];
@@ -23,7 +29,7 @@ class Staff extends Model
     }
 
     public function parent(){
-        return $this->belongsTo('App\Staff');
+        return $this->belongsTo('App\Staff', 'parent_id');
     }
 
     public function children(){

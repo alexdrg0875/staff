@@ -153,14 +153,14 @@
                     </li>
 
                     <li>
-                        <a href="#"><i class="fa fa-wrench fa-fw"></i> Posts<span class="fa arrow"></span></a>
+                        <a href="#"><i class="fa fa-wrench fa-fw"></i> Staff<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
-                                <a href="{{route('staff.index')}}">All Posts</a>
+                                <a href="{{route('staff.index')}}">All Staff</a>
                             </li>
 
                             <li>
-                                <a href="{{route('staff.create')}}">Create Post</a>
+                                <a href="{{route('staff.create')}}">Add employee </a>
                             </li>
 
                         </ul>

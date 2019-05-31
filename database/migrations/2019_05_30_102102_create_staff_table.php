@@ -23,6 +23,7 @@ class CreateStaffTable extends Migration
             $table->integer('parent_id')->index()->unsigned()->nullable();
             $table->timestamp('started_at')->index();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
