@@ -33,7 +33,9 @@ class AdminStaffController extends Controller
     public function create()
     {
         $positions = Position::pluck('name', 'id')->all();
-        return view('admin.staff.create', compact('positions'));
+        $maxHierarchyNum = Position::pluck('id')->last();
+        $chiefs = Staff::where('position_id', '<', $maxHierarchyNum)->pluck('name', 'id')->all();
+        return view('admin.staff.create', compact('positions', 'chiefs', 'maxHierarchyNum'));
     }
 
     /**
@@ -81,8 +83,9 @@ class AdminStaffController extends Controller
     public function edit($id)
     {
         $employee = Staff::findOrFail($id);
+        $chiefs = Staff::where('position_id', '<', $employee->position_id)->pluck('name', 'id')->all();
         $positions = Position::pluck('name', 'id')->all();
-        return view('admin.staff.edit', compact('employee','positions'));
+        return view('admin.staff.edit', compact('employee','positions', 'chiefs'));
     }
 
     /**

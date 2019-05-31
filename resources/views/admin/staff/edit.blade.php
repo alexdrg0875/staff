@@ -34,7 +34,7 @@
             </div>
             <div class="form-group">
                 {!! Form::label('parent_id', 'Chief:') !!}
-                {!! Form::text('parent_id', null, ['class'=>'form-control']) !!}
+                {!! Form::select('parent_id',['' => 'Choose chief'] + $chiefs, null, ['class'=>'form-control']) !!}
             </div>
             <div class="form-group">
                 {!! Form::label('started_at', 'Start working:') !!}
