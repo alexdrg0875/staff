@@ -1,7 +1,7 @@
 @extends('layouts/admin')
 
 @section('content')
-    <h2 class="bg-primary text-center">EDIT USER - {{$user->name}}</h2>
+    <h2 class="bg-primary text-center">Edit user - {{$user->name}}</h2>
 
     <div class="row">
         <div class="col-sm-3">

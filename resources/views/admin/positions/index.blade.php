@@ -10,7 +10,7 @@
         <p class="bg-success">{{session('updated_position')}}</p>
     @endif
 
-    <h2 class="bg-primary text-center">POSITIONS</h2>
+    <h2 class="bg-primary text-center">List of positions</h2>
     <div class="col-sm-6">
         {!! Form::open(['method'=>'POST', 'action'=>'AdminPositionsController@store']) !!}
 

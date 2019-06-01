@@ -8,7 +8,7 @@
 
 @section('content')
 
-    <h2 class="bg-primary text-center">UPLOAD MEDIA</h2>
+    <h2 class="bg-primary text-center">Upload files</h2>
 
     {!! Form::open(['method'=>'POST', 'action'=>'AdminMediasController@store', 'class' => 'dropzone','files'=>true]) !!}
 

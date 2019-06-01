@@ -3,7 +3,7 @@
 
 @section('content')
 
-    <h2 class="bg-primary text-center">CREATE NEW EMPLOYEE</h2>
+    <h2 class="bg-primary text-center">Create new employee</h2>
     <div class="row">
         {!! Form::open(['method'=>'POST', 'action'=>'AdminStaffController@store', 'files'=>true]) !!}
 

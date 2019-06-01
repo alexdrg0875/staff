@@ -1,7 +1,7 @@
 @extends('layouts/admin')
 
 @section('content')
-    <h2 class="bg-primary text-center">CREATE NEW USER</h2>
+    <h2 class="bg-primary text-center">Create new user</h2>
 
     <div class="row">
 

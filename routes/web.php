@@ -20,19 +20,23 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/admin' , function() {
-    return view('admin.index');
-});
 
 Route::get('/logout', 'Auth\LoginController@logout');
 
 Route::group(['middleware' => 'admin'], function (){
 
     Route::resource('admin/users', 'AdminUsersController');
+});
+
+Route::group(['middleware' => 'user'], function () {
+
+    Route::get('/admin' , function() {
+        return view('admin.index');
+    });
+    Route::get('/home', 'HomeController@index')->name('home');
     Route::resource('admin/staff', 'AdminStaffController');
     Route::resource('admin/positions', 'AdminPositionsController');
     Route::resource('admin/medias', 'AdminMediasController');
-
 });
+

@@ -6,7 +6,7 @@
         <p class="bg-danger">{{session('deleted_media')}}</p>
     @endif
 
-    <h2 class="bg-primary text-center">FILES</h2>
+    <h2 class="bg-primary text-center">List of media files</h2>
 
     <table class="table">
         <thead>

@@ -50,4 +50,13 @@ class User extends Authenticatable
         }
         return false;
     }
+
+    public function isUser() {
+        if($this->role_id) {
+            if($this->role && $this->is_active == 1) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

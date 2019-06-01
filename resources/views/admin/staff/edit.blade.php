@@ -3,7 +3,7 @@
 
 @section('content')
 
-    <h2 class="bg-primary text-center">EDIT EMPLOYEE DATA - {{$employee->name}}</h2>
+    <h2 class="bg-primary text-center">Edit employee data - {{$employee->name}}</h2>
 
     <div class="row">
 

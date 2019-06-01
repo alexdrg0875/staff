@@ -13,23 +13,23 @@ class PositionsTableSeeder extends Seeder
     public function run()
     {
         DB::table('positions')->insert([
-            'name' => 'national manager',
+            'name' => 'National manager',
         ]);
 
         DB::table('positions')->insert([
-            'name' => 'division manager',
+            'name' => 'Division manager',
         ]);
 
         DB::table('positions')->insert([
-            'name' => 'area manager',
+            'name' => 'Area manager',
         ]);
 
         DB::table('positions')->insert([
-            'name' => 'supervisor',
+            'name' => 'Supervisor',
         ]);
 
         DB::table('positions')->insert([
-            'name' => 'salesman',
+            'name' => 'Salesman',
         ]);
     }
 }
