@@ -35,4 +35,21 @@ class Staff extends Model
     public function children(){
         return $this->hasMany('App\Staff', 'parent_id', 'id');
     }
+
+    function addSeparatorPositions(){
+        if(isset($this)){
+            $maxPositionId = 0;
+            $output = [];
+
+            foreach($this as $item){
+                if($item->position_id > $maxPositionId){
+                    $output['name'] = $item->position->name;
+                    $maxPositionId = $item->position_id;
+                }
+                $output[] = $item;
+            }
+            return $output;
+        }
+    }
+
 }

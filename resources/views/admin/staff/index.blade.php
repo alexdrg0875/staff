@@ -36,10 +36,10 @@
                             <img height="50" src="{{$employee->photo ? $employee->photo->path : '/images/employee_default.jpg'}}" alt="employee photo">
                         </a>
                     </td>
-                    <td><a href="{{'staff/'. $employee->id . '/edit'}}">{{Str::limit($employee->name,20)}}</a></td>
+                    <td><a href="{{'staff/'. $employee->id . '/edit'}}">{{$employee->name}}</a></td>
                     <td>{{$employee->position ? $employee->position->name : 'Non positioned'}}</td>
                     <td>{{$employee->salary}}</td>
-                    <td>{{$employee->parent ? $employee->parent->name : 'Has no chief'}}</td>
+                    <td>{{$employee->parent ? $employee->parent->name .' ('. $employee->parent->position->name . ')' : 'Has no chief'}}</td>
                     <td>{{$employee->started_at ? $employee->started_at->format('d.m.Y') : 'No data'}}</td>
                     <td>{{$employee->user ? $employee->user->name : 'Data not assigned'}}</td>
                 </tr>

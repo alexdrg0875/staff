@@ -11,6 +11,7 @@
 |
 */
 
+use App\Staff;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -32,7 +33,8 @@ Route::group(['middleware' => 'admin'], function (){
 Route::group(['middleware' => 'user'], function () {
 
     Route::get('/admin' , function() {
-        return view('admin.index');
+        $mainChiefs = Staff::where('parent_id', NULL)->get();
+        return view('admin.index', compact('mainChiefs'));
     });
     Route::get('/home', 'HomeController@index')->name('home');
     Route::resource('admin/staff', 'AdminStaffController');

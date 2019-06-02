@@ -10,6 +10,7 @@ use App\Staff;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
+use function Sodium\library_version_major;
 
 class AdminStaffController extends Controller
 {
@@ -20,6 +21,7 @@ class AdminStaffController extends Controller
      */
     public function index()
     {
+
         $staff = Staff::all();
 
         return view('admin.staff.index', compact('staff'));
@@ -83,7 +85,7 @@ class AdminStaffController extends Controller
     public function edit($id)
     {
         $employee = Staff::findOrFail($id);
-        $chiefs = Staff::where('position_id', '<', $employee->position_id)->pluck('name', 'id')->all();
+        $chiefs = Staff::where('position_id', '<', $employee->position_id)->orderBy('position_id')->pluck('name', 'id')->all();
         $positions = Position::pluck('name', 'id')->all();
         return view('admin.staff.edit', compact('employee','positions', 'chiefs'));
     }
@@ -132,5 +134,18 @@ class AdminStaffController extends Controller
         $employee->delete();
         Session::flash('deleted_employee', 'The employee has been deleted');    // add putting information after deleting user
         return redirect('/admin/staff');
+    }
+
+    public static function htmlTreeBuilder($array){
+        echo '<ul class = "treeCSS">';
+        foreach ($array as $row){
+            echo '<li>';
+            echo $row->name . ' (<b>' . $row->position->name . "</b> / <b>Employment date: </b>" . $row->started_at->format('d.m.Y') . '<b> / Salary: </b>' . $row->salary . ")" ;
+            if($row->children){
+                self::htmlTreeBuilder($row->children);
+            }
+            echo '</li>';
+        }
+        echo '</ul>';
     }
 }
