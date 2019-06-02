@@ -9,6 +9,7 @@ use App\Role;
 use App\Staff;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 use function Sodium\library_version_major;
 
@@ -36,7 +37,8 @@ class AdminStaffController extends Controller
     {
         $positions = Position::pluck('name', 'id')->all();
         $maxHierarchyNum = Position::pluck('id')->last();
-        $chiefs = Staff::where('position_id', '<', $maxHierarchyNum)->pluck('name', 'id')->all();
+//        $chiefs = Staff::where('position_id', '<', $maxHierarchyNum)->pluck('name', 'id')->all();
+        $chiefs = Staff::join('positions', 'position_id', '=', 'positions.id')->select(DB::raw("CONCAT(staff.name,' (', positions.name,')') AS name"), 'staff.id')->where('position_id', '<', $maxHierarchyNum)->orderBy('position_id')->pluck('name', 'id')->all();
         return view('admin.staff.create', compact('positions', 'chiefs', 'maxHierarchyNum'));
     }
 
@@ -85,7 +87,8 @@ class AdminStaffController extends Controller
     public function edit($id)
     {
         $employee = Staff::findOrFail($id);
-        $chiefs = Staff::where('position_id', '<', $employee->position_id)->orderBy('position_id')->pluck('name', 'id')->all();
+//        $chiefs = Staff::where('position_id', '<', $employee->position_id)->orderBy('position_id')->pluck('name', 'id')->all();
+        $chiefs = Staff::join('positions', 'position_id', '=', 'positions.id')->select(DB::raw("CONCAT(staff.name,' (', positions.name,')') AS name"), 'staff.id')->where('position_id', '<', $employee->position_id)->orderBy('position_id')->pluck('name', 'id')->all();
         $positions = Position::pluck('name', 'id')->all();
         return view('admin.staff.edit', compact('employee','positions', 'chiefs'));
     }
@@ -140,7 +143,7 @@ class AdminStaffController extends Controller
         echo '<ul class = "treeCSS">';
         foreach ($array as $row){
             echo '<li>';
-            echo $row->name . ' (<b>' . $row->position->name . "</b> / <b>Employment date: </b>" . $row->started_at->format('d.m.Y') . '<b> / Salary: </b>' . $row->salary . ")" ;
+            echo '<a href="admin/staff/' . $row->id . '/edit">' . $row->name . '</a>' . ' (<b>' . $row->position->name . "</b> / <b>Employment date: </b>" . $row->started_at->format('d.m.Y') . '<b> / Salary: </b>' . $row->salary . ")" ;
             if($row->children){
                 self::htmlTreeBuilder($row->children);
             }

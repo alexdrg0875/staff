@@ -27,7 +27,7 @@ class StaffRequest extends FormRequest
             'name'          => 'required',
             'position_id'   => 'required',
             'salary'        => 'required',
-            'parent_id'     => 'required',
+//            'parent_id'     => 'required',
             'started_at'    => 'required',
         ];
     }
