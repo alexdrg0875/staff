@@ -20,6 +20,7 @@
             </div>
             <div class="col-md-3">
                 <div class="form-group">
+                    <label for="serach">Search:</label>
                     <input type="text" name="serach" id="serach" class="form-control" />
                 </div>
             </div>
