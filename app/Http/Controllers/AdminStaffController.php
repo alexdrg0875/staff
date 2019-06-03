@@ -23,9 +23,11 @@ class AdminStaffController extends Controller
     public function index()
     {
 
-        $staff = Staff::all();
+        $staff = DB::table('views_overall_staff')->orderBy('id', 'asc')->paginate(25);
+//        $staff = Staff::orderBy('id', 'asc')->paginate(25);
 
-        return view('admin.staff.index', compact('staff'));
+        return view('admin.staff.index')->with('data', $staff);
+//        return view('admin.staff.index', compact('staff'));
     }
 
     /**
@@ -139,6 +141,11 @@ class AdminStaffController extends Controller
         return redirect('/admin/staff');
     }
 
+    public static function formatMoney($in_sum) {
+        $out_sum = number_format(ceil($in_sum),0,',', ' '). " ₽";
+        return $out_sum;
+    }
+
     public static function htmlTreeBuilder($array){
         echo '<ul class = "treeCSS">';
         foreach ($array as $row){
@@ -150,5 +157,28 @@ class AdminStaffController extends Controller
             echo '</li>';
         }
         echo '</ul>';
+    }
+
+    function fetch_data(Request $request)
+    {
+        if($request->ajax())
+        {
+            $sort_by = $request->get('sortby');
+            $sort_type = $request->get('sorttype');
+            $query = $request->get('query');
+            $query = str_replace(" ", "%", $query);
+            $data = DB::table('views_overall_staff')
+                ->where('id', 'like', '%'.$query.'%')
+                ->orWhere('photo', 'like', '%'.$query.'%')
+                ->orWhere('name', 'like', '%'.$query.'%')
+                ->orWhere('position', 'like', '%'.$query.'%')
+                ->orWhere('salary', 'like', '%'.$query.'%')
+                ->orWhere('chief', 'like', '%'.$query.'%')
+                ->orWhere('employment_date', 'like', '%'.$query.'%')
+                ->orWhere('owner', 'like', '%'.$query.'%')
+                ->orderBy($sort_by, $sort_type)
+                ->paginate(25);
+            return view('admin.staff.pagination_data', compact('data'))->render();
+        }
     }
 }

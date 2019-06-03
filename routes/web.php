@@ -36,6 +36,7 @@ Route::group(['middleware' => 'user'], function () {
         $mainChiefs = Staff::where('parent_id', NULL)->get();
         return view('admin.index', compact('mainChiefs'));
     });
+    Route::get('/admin/staff/fetch_data', 'AdminStaffController@fetch_data');
     Route::get('/home', 'HomeController@index')->name('home');
     Route::resource('admin/staff', 'AdminStaffController');
     Route::resource('admin/positions', 'AdminPositionsController');
