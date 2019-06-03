@@ -29,14 +29,14 @@
             <table class="table table-striped table-bordered">
                 <thead>
                 <tr>
-                    <th class="sorting text-center" data-sorting_type="asc" data-column_name="id" style="cursor: pointer">ID </th>
-                    <th class="sorting text-center" data-sorting_type="asc" data-column_name="photo" style="cursor: pointer">Photo </th>
-                    <th class="sorting" data-sorting_type="asc" data-column_name="name" style="cursor: pointer">Name </th>
-                    <th class="sorting text-center" data-sorting_type="asc" data-column_name="position" style="cursor: pointer">Position </th>
-                    <th class="sorting text-center" data-sorting_type="asc" data-column_name="salary" style="cursor: pointer">Salary </th>
-                    <th class="sorting" data-sorting_type="asc" data-column_name="chief" style="cursor: pointer">Chief </th>
-                    <th class="sorting text-center" data-sorting_type="asc" data-column_name="employment_date" style="cursor: pointer">Employment Date </th>
-                    <th class="sorting" data-sorting_type="asc" data-column_name="owner" style="cursor: pointer">Created </th>
+                    <th class="sorting text-center" data-sorting_type="asc" data-column_name="id" style="cursor: pointer; vertical-align: middle">ID <span id="id_icon"></span></th>
+                    <th class="sorting text-center" data-sorting_type="asc" data-column_name="photo" style="cursor: pointer; vertical-align: middle">Photo <span id="photo_icon"></span></th>
+                    <th class="sorting text-center" data-sorting_type="asc" data-column_name="name" style="cursor: pointer; vertical-align: middle">Name <span id="name_icon"></span></th>
+                    <th class="sorting text-center" data-sorting_type="asc" data-column_name="position" style="cursor: pointer; vertical-align: middle">Position <span id="position_icon"></span></th>
+                    <th class="sorting text-center" data-sorting_type="asc" data-column_name="salary" style="cursor: pointer; vertical-align: middle">Salary <span id="salary_icon"></span></th>
+                    <th class="sorting text-center" data-sorting_type="asc" data-column_name="chief" style="cursor: pointer; vertical-align: middle">Chief <span id="chief_icon"></span></th>
+                    <th class="sorting text-center" data-sorting_type="asc" data-column_name="employment_date" style="cursor: pointer; vertical-align: middle">Employment Date <span id="employment_date_icon"></span></th>
+                    <th class="sorting text-center" data-sorting_type="asc" data-column_name="owner" style="cursor: pointer;vertical-align: middle">Made changes <span id="owner_icon"></span></th>
                 </tr>
                 </thead>
                 <tbody>
@@ -79,7 +79,13 @@
             function clear_icon()
             {
                 $('#id_icon').html('');
-                $('#post_title_icon').html('');
+                $('#photo_icon').html('');
+                $('#name_icon').html('');
+                $('#position_icon').html('');
+                $('#salary_icon').html('');
+                $('#chief_icon').html('');
+                $('#employment_date_icon').html('');
+                $('#owner_icon').html('');
             }
 
             function fetch_data(page, sort_type, sort_by, query)

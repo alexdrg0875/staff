@@ -32,10 +32,10 @@ Route::group(['middleware' => 'admin'], function (){
 
 Route::group(['middleware' => 'user'], function () {
 
-    Route::get('/admin' , function() {
-        $mainChiefs = Staff::where('parent_id', NULL)->get();
-        return view('admin.index', compact('mainChiefs'));
+    Route::get('/admin', function() {
+        return view('admin.index');
     });
+    Route::get('/admin/staff/tree' , 'AdminStaffController@tree');
     Route::get('/admin/staff/fetch_data', 'AdminStaffController@fetch_data');
     Route::get('/home', 'HomeController@index')->name('home');
     Route::resource('admin/staff', 'AdminStaffController');

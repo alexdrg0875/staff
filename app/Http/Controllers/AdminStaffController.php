@@ -30,6 +30,13 @@ class AdminStaffController extends Controller
 //        return view('admin.staff.index', compact('staff'));
     }
 
+    public function tree()
+    {
+
+        $mainChiefs = Staff::where('parent_id', NULL)->get();
+        return view('admin.staff.tree', compact('mainChiefs'));
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -150,7 +157,7 @@ class AdminStaffController extends Controller
         echo '<ul class = "treeCSS">';
         foreach ($array as $row){
             echo '<li>';
-            echo '<a href="admin/staff/' . $row->id . '/edit">' . $row->name . '</a>' . ' (<b>' . $row->position->name . "</b> / <b>Employment date: </b>" . $row->started_at->format('d.m.Y') . '<b> / Salary: </b>' . $row->salary . ")" ;
+            echo '<a href="' . $row->id . '/edit">' . $row->name . '</a>' . ' (<b>' . $row->position->name . "</b> / <b>Employment date: </b>" . $row->started_at->format('d.m.Y') . '<b> / Salary: </b>' . $row->salary . ")" ;
             if($row->children){
                 self::htmlTreeBuilder($row->children);
             }

@@ -58,7 +58,7 @@ class StaffTableSeeder extends Seeder
             'started_at' => now(),
         ]);
         $i1 = 1;
-        while ( $i1 <= 5) {
+        while ( $i1 <= 10) {
             $counterId++;
             DB::table('staff')->insert([
                 'name' => fullNameGen(),
@@ -71,7 +71,7 @@ class StaffTableSeeder extends Seeder
 
             $i2 = 1;
             $parentId3 = $counterId;
-            while ( $i2 <= 5) {
+            while ( $i2 <= 10) {
                 $counterId++;
                 DB::table('staff')->insert([
                     'name' => fullNameGen(),
@@ -84,7 +84,7 @@ class StaffTableSeeder extends Seeder
 
                 $i3 = 1;
                 $parentId4 = $counterId;
-                while ( $i3 <= 10) {
+                while ( $i3 <= 20) {
                     $counterId++;
                     DB::table('staff')->insert([
                         'name' => fullNameGen(),
@@ -97,7 +97,7 @@ class StaffTableSeeder extends Seeder
 
                     $i4 = 1;
                     $parentId5 = $counterId;
-                    while ( $i4 <= 10) {
+                    while ( $i4 <= 25) {
                         $counterId++;
                         DB::table('staff')->insert([
                             'name' => fullNameGen(),

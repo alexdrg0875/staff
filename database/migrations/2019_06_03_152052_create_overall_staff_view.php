@@ -44,6 +44,6 @@ class CreateOverallStaffView extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('overall_staff_view');
+        Schema::dropIfExists('views_overall_staff');
     }
 }

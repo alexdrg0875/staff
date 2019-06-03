@@ -159,7 +159,9 @@
                             <li>
                                 <a href="{{route('staff.index')}}">List of employees</a>
                             </li>
-
+                            <li>
+                                <a href="/admin/staff/tree">List of employees(tree view)</a>
+                            </li>
                             <li>
                                 <a href="{{route('staff.create')}}">Add employee </a>
                             </li>
