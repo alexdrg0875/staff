@@ -3,11 +3,21 @@
 @section('content')
 
     @if(Session::has('deleted_position'))
-        <p class="bg-danger">{{session('deleted_position')}}</p>
+        <div class="alert alert-danger">
+            <p>{{session('deleted_position')}}</p>
+        </div>
     @endif
 
     @if(Session::has('updated_position'))
-        <p class="bg-success">{{session('updated_position')}}</p>
+        <div class="alert alert-success">
+            <p>{{session('updated_position')}}</p>
+        </div>
+    @endif
+
+    @if(Session::has('created_position'))
+        <div class="alert alert-success">
+            <p>{{session('created_position')}}</p>
+        </div>
     @endif
 
     <h2 class="bg-primary text-center">List of positions</h2>

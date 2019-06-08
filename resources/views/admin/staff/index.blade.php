@@ -3,14 +3,24 @@
 
 @section('content')
     @if(Session::has('deleted_employee'))
-        <p class="bg-danger">{{session('deleted_employee')}}</p>
+        <div class="alert alert-danger">
+            <p>{{session('deleted_employee')}}</p>
+        </div>
     @endif
 
     @if(Session::has('updated_employee'))
-        <p class="bg-success">{{session('updated_employee')}}</p>
+        <div class="alert alert-success">
+            <p>{{session('updated_employee')}}</p>
+        </div>
     @endif
 
-    <div class="container">
+    @if(Session::has('created_employee'))
+        <div class="alert alert-success">
+            <p>{{session('created_employee')}}</p>
+        </div>
+    @endif
+
+    <div class="container-fluid">
 
         <h2 class="bg-primary text-center">List of employees</h2>
 
@@ -27,7 +37,7 @@
         </div>
 
         <div class="table-responsive">
-            <table class="table table-striped table-bordered">
+            <table class="table table-bordered table-hover">
                 <thead>
                 <tr>
                     <th class="sorting text-center" data-sorting_type="asc" data-column_name="id" style="cursor: pointer; vertical-align: middle">ID <span id="id_icon"></span></th>

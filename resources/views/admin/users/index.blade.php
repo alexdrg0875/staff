@@ -2,11 +2,21 @@
 
 @section('content')
     @if(Session::has('deleted_user'))
-        <p class="bg-danger">{{session('deleted_user')}}</p>
+        <div class="alert alert-danger">
+            <p>{{session('deleted_user')}}</p>
+        </div>
     @endif
 
     @if(Session::has('updated_user'))
-        <p class="bg-success">{{session('updated_user')}}</p>
+        <div class="alert alert-success">
+            <p>{{session('updated_user')}}</p>
+        </div>
+    @endif
+
+    @if(Session::has('created_user'))
+        <div class="alert alert-success">
+            <p>{{session('created_user')}}</p>
+        </div>
     @endif
 
     <h2 class="bg-primary text-center">List of users</h2>

@@ -30,12 +30,7 @@ class AdminStaffController extends Controller
 //        return view('admin.staff.index', compact('staff'));
     }
 
-    public function tree()
-    {
 
-        $mainChiefs = Staff::where('parent_id', NULL)->get();
-        return view('admin.staff.tree', compact('mainChiefs'));
-    }
 
     /**
      * Show the form for creating a new resource.
@@ -72,6 +67,8 @@ class AdminStaffController extends Controller
         }
 
         Staff::create($input);
+
+        Session::flash('created_employee', 'The employee has been created');
 
         return redirect('/admin/staff');
     }
@@ -148,10 +145,34 @@ class AdminStaffController extends Controller
         return redirect('/admin/staff');
     }
 
+    public function tree()
+    {
+//        $staff = DB::table('views_for_tree_staff')->orderBy('parent_id')->limit(100)->get();
+//        $mainParent = DB::table('views_for_tree_staff')->where('parent_id', NULL)->pluck('id');
+//
+//        return view('admin.staff.tree', compact('staff', 'mainParent'));
+
+        $mainChiefs = Staff::where('parent_id', NULL)->get();
+        return view('admin.staff.tree', compact('mainChiefs'));
+    }
+
     public static function formatMoney($in_sum) {
         $out_sum = number_format(ceil($in_sum),0,',', ' '). " ₽";
         return $out_sum;
     }
+
+//    public static function htmlTreeBuilder($array, $id){
+//        echo '<ul class = "treeCSS">';
+//        foreach ($array[$id] as $row){
+//            echo '<li>';
+//            echo '<a href="' . $row->id . '/edit">' . $row->name . '</a>' . ' (<b>' . $row->position . "</b> / <b>Employment date: </b>" . $row->employment_date . '<b> / Salary: </b>' . $row->salary . ")" ;
+//            if($row->parent_id){
+//                self::htmlTreeBuilder($array, $row[$id]->parent_id);
+//            }
+//            echo '</li>';
+//        }
+//        echo '</ul>';
+//    }
 
     public static function htmlTreeBuilder($array){
         echo '<ul class = "treeCSS">';

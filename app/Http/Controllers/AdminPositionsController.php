@@ -39,6 +39,8 @@ class AdminPositionsController extends Controller
     {
         Position::create($request->all());
 
+        Session::flash('created_position', 'The position has been created');
+
         return redirect('/admin/positions');
     }
 

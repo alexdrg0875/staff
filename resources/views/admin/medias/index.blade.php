@@ -3,7 +3,9 @@
 @section('content')
 
     @if(Session::has('deleted_media'))
-        <p class="bg-danger">{{session('deleted_media')}}</p>
+        <div class="alert alert-danger">
+            <p>{{session('deleted_media')}}</p>
+        </div>
     @endif
 
     <h2 class="bg-primary text-center">List of media files</h2>
