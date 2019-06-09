@@ -151,9 +151,14 @@ class AdminStaffController extends Controller
 //        $mainParent = DB::table('views_for_tree_staff')->where('parent_id', NULL)->pluck('id');
 //
 //        return view('admin.staff.tree', compact('staff', 'mainParent'));
+        $staff = Staff::where('parent_id', NULL)->get();
+        return view('admin.staff.tree', compact('staff'));
+    }
 
-        $mainChiefs = Staff::where('parent_id', NULL)->get();
-        return view('admin.staff.tree', compact('mainChiefs'));
+    public function tree_data($id)
+    {
+        $staff = Staff::where('parent_id', $id)->get();
+        return view('admin.staff.tree_data', compact('staff'));
     }
 
     public static function formatMoney($in_sum) {
@@ -174,18 +179,15 @@ class AdminStaffController extends Controller
 //        echo '</ul>';
 //    }
 
-    public static function htmlTreeBuilder($array){
-        echo '<ul class = "treeCSS">';
-        foreach ($array as $row){
-            echo '<li>';
-            echo '<a href="' . $row->id . '/edit">' . $row->name . '</a>' . ' (<b>' . $row->position->name . "</b> / <b>Employment date: </b>" . $row->started_at->format('d.m.Y') . '<b> / Salary: </b>' . $row->salary . ")" ;
-            if($row->children){
-                self::htmlTreeBuilder($row->children);
-            }
-            echo '</li>';
-        }
-        echo '</ul>';
-    }
+//    public static function htmlTreeBuilder($array){
+//        echo '<ul class = "treeCSS">';
+//        foreach ($array as $row){
+//            echo '<li style="cursor:pointer" id="' . $row->id . '" onclick="loadTree(' . $row->id . ')">';
+//            echo $row->name . ' (<b>Position: </b>' . $row->position->name . ' / <b>Employment date: </b>' . $row->started_at->format('d.m.Y') . '<b> / Salary: </b>' . $row->salary . " UAH)" . '<a href="' . $row->id . '/edit"> Edit </a>';
+//            echo '<span id="id_' . $row->id .'"></span></li>';
+//        }
+//        echo '</ul>';
+//    }
 
     function fetch_data(Request $request)
     {

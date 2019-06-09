@@ -35,7 +35,8 @@ Route::group(['middleware' => 'user'], function () {
     Route::get('/admin', function() {
         return view('admin.index');
     });
-    Route::get('/admin/staff/tree' , 'AdminStaffController@tree');
+    Route::get('/admin/staff/tree/' , 'AdminStaffController@tree');
+    Route::get('/admin/staff/tree/{id}' , 'AdminStaffController@tree_data');
     Route::get('/admin/staff/fetch_data', 'AdminStaffController@fetch_data');
     Route::get('/home', 'HomeController@index')->name('home');
     Route::resource('admin/staff', 'AdminStaffController');

@@ -61,8 +61,8 @@
 
 @section('content')
     <h2 class="bg-primary text-center">Staff hierarchy</h2>
-{{--{{$staff[0]->name}}--}}
-    {{\App\Http\Controllers\AdminStaffController::htmlTreeBuilder($mainChiefs)}}
+    @include('admin.staff.tree_data')
+
 @endsection
 
 @section('scripts')
@@ -80,6 +80,19 @@
                 }
             }
         })();
+
+        function loadTree(id) {
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    document.getElementById("id_"+id).innerHTML = this.responseText;
+                    document.getElementById("id_"+id).id = "id_" + id;
+                }
+            };
+            xhttp.open("GET", "/admin/staff/tree/"+id, true);
+            xhttp.send();
+            event.stopPropagation ? event.stopPropagation() : (event.cancelBubble=true);
+        }
     </script>
 @endsection
 
